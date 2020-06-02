@@ -26,6 +26,13 @@ buildscript {
                 appCompat   : "androidx.appcompat:appcompat:1.0.2",
         ]
 
+        koinVersion = '2.0.0-rc-2'
+        koinDep = [
+                core     : "org.koin:koin-core:${koinVersion}",
+                android  : "org.koin:koin-android:${koinVersion}",
+                viewmodel: "org.koin:koin-androidx-viewmodel:${koinVersion}",
+        ]
+
         archComponentsVersion = '2.0.0'
         archComponents = [
                 components        : "androidx.lifecycle:lifecycle-extensions:${archComponentsVersion}",
