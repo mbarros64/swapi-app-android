@@ -1,9 +1,10 @@
-package com.mbarros64.swapi_app_android
+package com.swapi_app_android.starwars
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.swapi_app_android.starwars.utils.Activities
-import com.swapi_app_android.starwars.utils.intentTo
+import com.mbarros64.swapi_app_android.R
+import com.swapi_app_android.starwars.extensions.Activities
+import com.swapi_app_android.starwars.extensions.intentTo
 
 class StarwarsMainActivity : AppCompatActivity() {
 
