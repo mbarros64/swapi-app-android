@@ -18,7 +18,7 @@ class CharacterActivity : AppCompatActivity(), CharacterSearchFragment.Character
 
         injectCharacterDependencies()
 
-        navigateTo(CharacterSearchFragment.newInstance(), CharacterSearchFragment.TAG)
+        displayFragment(CharacterSearchFragment.newInstance(), CharacterSearchFragment.TAG)
     }
 
     override fun onBackPressed() {
@@ -28,10 +28,10 @@ class CharacterActivity : AppCompatActivity(), CharacterSearchFragment.Character
     }
 
     override fun showCharacterDetails(character: CharacterSearchModel) {
-        navigateTo(CharacterDetailsFragment.newInstance(character), CharacterDetailsFragment.TAG)
+        displayFragment(CharacterDetailsFragment.newInstance(character), CharacterDetailsFragment.TAG)
     }
 
-    private fun navigateTo(fragment: Fragment, tag: String) {
+    private fun displayFragment(fragment: Fragment, tag: String) {
         if (supportFragmentManager.findFragmentByTag(tag) != null) return
         supportFragmentManager
             .beginTransaction()

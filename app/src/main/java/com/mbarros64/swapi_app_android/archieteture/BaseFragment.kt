@@ -125,6 +125,6 @@ abstract class BaseFragment : Fragment() {
     }
 
     //endregion
-    protected fun popBack() = parentActivity.supportFragmentManager.popBackStack()
+    protected open fun popBack() = parentActivity.supportFragmentManager.popBackStack()
 
 }

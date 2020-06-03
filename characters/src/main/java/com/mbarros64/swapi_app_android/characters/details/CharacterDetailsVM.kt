@@ -6,6 +6,7 @@ import com.mbarros64.swapi_app_android.archieteture.BaseVM
 import com.mbarros64.swapi_app_android.characters.details.models.CharacterDetailsModel
 import com.mbarros64.swapi_app_android.characters.details.models.FilmDetailsModel
 import com.mbarros64.swapi_app_android.characters.details.models.SpeciesDetailsModel
+import com.mbarros64.swapi_app_android.characters.details.models.response.HomeworldResponseModel
 import com.mbarros64.swapi_app_android.extensions.divide
 import com.mbarros64.swapi_app_android.extensions.hide
 import com.mbarros64.swapi_app_android.extensions.show

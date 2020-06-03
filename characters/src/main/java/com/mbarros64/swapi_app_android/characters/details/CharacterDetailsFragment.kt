@@ -88,12 +88,12 @@ class CharacterDetailsFragment : BaseFragment() {
             llSpeciesDetails.visible()
             llSpeciesDetails.removeAllViews()
             forEach {
-                val specieLanguageView =
+                val specieDetailsView =
                     SpecieDetailsView(
                         parentActivity
                     )
-                specieLanguageView.specieDetails(it)
-                llSpeciesDetails.addView(specieLanguageView)
+                specieDetailsView.specieDetails(it)
+                llSpeciesDetails.addView(specieDetailsView)
             }
         }
 

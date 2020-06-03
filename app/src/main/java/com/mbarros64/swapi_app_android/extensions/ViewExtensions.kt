@@ -1,9 +1,6 @@
 package com.mbarros64.swapi_app_android.extensions
 
 import android.view.View
-import android.text.Html
-import android.widget.TextView
-
 
 fun View.visible() {
     this.visibility = View.VISIBLE
@@ -11,13 +8,4 @@ fun View.visible() {
 
 fun View.gone() {
     this.visibility = View.GONE
-}
-
-@Suppress("DEPRECATION")
-fun TextView.html(html: String?) {
-    if (!html.isValid()) return
-    if (android.os.Build.VERSION.SDK_INT >= 24)
-        this.text = Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY)
-    else
-        this.text = Html.fromHtml(html)
 }
