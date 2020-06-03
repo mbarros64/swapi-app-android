@@ -50,6 +50,8 @@ buildscript {
                 retrofit    : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
                 retrofitRx  : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
                 retrofitGson: "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+                /*https://github.com/JodaOrg/joda-time/releases*/
+                'jodaTime'  : "joda-time:joda-time:2.10.1",
         ]
 
         rx = [
