@@ -3,10 +3,10 @@
 buildscript {
 
     ext {
-        compileSdk = 29
-        buildTools = '29.0.3'
+        compileSdk = 28
+        buildTools = '28.0.3'
         minSdk = 21
-        targetSdk = 29
+        targetSdk = 28
 
         /*Jetpack / AndroidX dependency releases: https://dl.google.com/dl/android/maven2/index.html*/
 

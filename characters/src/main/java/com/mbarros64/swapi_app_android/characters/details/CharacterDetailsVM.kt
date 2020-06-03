@@ -11,6 +11,7 @@ import com.mbarros64.swapi_app_android.extensions.hide
 import com.mbarros64.swapi_app_android.extensions.show
 import io.reactivex.Observable
 import io.reactivex.rxkotlin.addTo
+import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 
 
@@ -18,8 +19,8 @@ class CharacterDetailsVM(private val repo: CharacterDetailsContract.Repo) : Base
 
     private val characterDetails = MutableLiveData<CharacterDetailsModel>()
 
-    private var specieName: String = ""
-    private var specieLanguage: String = ""
+    private var specieName: String? = null
+    private var specieLanguage: String? = null
 
     private val specieDetails = mutableListOf<SpeciesDetailsModel>()
 
@@ -47,8 +48,8 @@ class CharacterDetailsVM(private val repo: CharacterDetailsContract.Repo) : Base
                 .map { homeworldResponse ->
                     specieDetails.add(
                         SpeciesDetailsModel(specieName, specieLanguage,
-                        homeworldResponse.name, homeworldResponse.population)
-                    )
+                            homeworldResponse.name, homeworldResponse.population))
+
                 }
                 .toList()
                 .map {
@@ -56,6 +57,8 @@ class CharacterDetailsVM(private val repo: CharacterDetailsContract.Repo) : Base
                     characterDetails.postValue(newData)
                     return@map newData
                 }
+                .onErrorResumeNext { Single.just(characterDetails.value) }
+
 
                 .observeOn(Schedulers.io())
                 .flatMapObservable { details -> Observable.fromIterable(details.filmUrls) }
