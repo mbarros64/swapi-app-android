@@ -88,7 +88,10 @@ class CharacterDetailsFragment : BaseFragment() {
             llSpeciesDetails.visible()
             llSpeciesDetails.removeAllViews()
             forEach {
-                val specieLanguageView = SpecieDetailsView(parentActivity)
+                val specieLanguageView =
+                    SpecieDetailsView(
+                        parentActivity
+                    )
                 specieLanguageView.specieDetails(it)
                 llSpeciesDetails.addView(specieLanguageView)
             }
@@ -98,7 +101,10 @@ class CharacterDetailsFragment : BaseFragment() {
             tvFilmsLabel.visible()
             llFilms.visible()
             forEach {
-                val filmDetailsView = FilmDetailsView(parentActivity)
+                val filmDetailsView =
+                    FilmDetailsView(
+                        parentActivity
+                    )
                 filmDetailsView.filmDetails(it)
                 llFilms.addView(filmDetailsView)
             }

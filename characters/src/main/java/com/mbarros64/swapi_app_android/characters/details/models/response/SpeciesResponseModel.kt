@@ -1,4 +1,4 @@
-package com.mbarros64.swapi_app_android.characters.details.models
+package com.mbarros64.swapi_app_android.characters.details.models.response
 
 import com.google.gson.annotations.SerializedName
 

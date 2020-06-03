@@ -4,12 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.mbarros64.swapi_app_android.archieteture.BaseVM
 import com.mbarros64.swapi_app_android.characters.details.models.CharacterDetailsModel
+import com.mbarros64.swapi_app_android.characters.details.models.FilmDetailsModel
+import com.mbarros64.swapi_app_android.characters.details.models.SpeciesDetailsModel
 import com.mbarros64.swapi_app_android.extensions.divide
 import com.mbarros64.swapi_app_android.extensions.hide
 import com.mbarros64.swapi_app_android.extensions.show
 import io.reactivex.Observable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
+
 
 class CharacterDetailsVM(private val repo: CharacterDetailsContract.Repo) : BaseVM() {
 
@@ -18,7 +21,7 @@ class CharacterDetailsVM(private val repo: CharacterDetailsContract.Repo) : Base
     private var specieName: String = ""
     private var specieLanguage: String = ""
 
-    private val specieDetails = mutableListOf<CharacterDetailsModel.SpeciesDetailsModel>()
+    private val specieDetails = mutableListOf<SpeciesDetailsModel>()
 
     fun getCharacterDetails(url: String): LiveData<CharacterDetailsModel> {
         if (characterDetails.value == null) {
@@ -43,11 +46,8 @@ class CharacterDetailsVM(private val repo: CharacterDetailsContract.Repo) : Base
                 .observeOn(Schedulers.computation())
                 .map { homeworldResponse ->
                     specieDetails.add(
-                        CharacterDetailsModel.SpeciesDetailsModel(
-                            specieName,
-                            specieLanguage,
-                            homeworldResponse.name,
-                            homeworldResponse.population)
+                        SpeciesDetailsModel(specieName, specieLanguage,
+                        homeworldResponse.name, homeworldResponse.population)
                     )
                 }
                 .toList()
@@ -64,14 +64,9 @@ class CharacterDetailsVM(private val repo: CharacterDetailsContract.Repo) : Base
                 .observeOn(Schedulers.computation())
                 .map { filmsResponse ->
                     val currentValue = characterDetails.value
-                    val films = mutableListOf<CharacterDetailsModel.FilmDetailsModel>()
+                    val films = mutableListOf<FilmDetailsModel>()
                     filmsResponse.forEach { film ->
-                        films.add(
-                            CharacterDetailsModel.FilmDetailsModel(
-                                film.title,
-                                film.releaseDate,
-                                film.openingCrawl)
-                        )
+                        films.add(FilmDetailsModel(film.title, film.releaseDate, film.openingCrawl))
                     }
                     return@map currentValue?.copy(filmDetails = films)
                 }
