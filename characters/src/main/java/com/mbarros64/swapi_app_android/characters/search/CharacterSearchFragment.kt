@@ -1,27 +1,26 @@
 package com.mbarros64.swapi_app_android.characters.search
 
+import android.content.Context
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
-import android.widget.SearchView
+import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.Observer
+import io.reactivex.rxkotlin.addTo
+import io.reactivex.subjects.PublishSubject
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.mbarros64.swapi_app_android.archieteture.BaseFragment
 import com.mbarros64.swapi_app_android.characters.R
 import com.mbarros64.swapi_app_android.characters.search.models.CharacterSearchModel
-import com.mbarros64.swapi_app_android.archieteture.BaseFragment
 import com.mbarros64.swapi_app_android.extensions.EndlessScrollListener
-import com.mbarros64.swapi_app_android.extensions.visible
 import com.mbarros64.swapi_app_android.extensions.gone
-import io.reactivex.subjects.PublishSubject
+import com.mbarros64.swapi_app_android.extensions.visible
 import kotlinx.android.synthetic.main.actionbar_toolbar.*
 import kotlinx.android.synthetic.main.fragment_search_character.*
 import org.koin.android.ext.android.inject
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
-import io.reactivex.rxkotlin.addTo
 import java.util.concurrent.TimeUnit
-import android.content.Context
-
 
 
 class CharacterSearchFragment : BaseFragment(), CharacterSearchAdapter.Interaction {
@@ -33,7 +32,7 @@ class CharacterSearchFragment : BaseFragment(), CharacterSearchAdapter.Interacti
     private val adapter: CharacterSearchAdapter by lazy { CharacterSearchAdapter(this) }
 
     //Search
-    private var searchView: android.widget.SearchView? = null
+    private var searchView: SearchView? = null
     private val searchListener = PublishSubject.create<String>()
 
     //Pagination
