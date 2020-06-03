@@ -25,8 +25,20 @@ abstract class BaseFragment : Fragment() {
 
     protected lateinit var parentActivity: AppCompatActivity
 
+    @CallSuper
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    @CallSuper
+
     override
-    fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         parentActivity = activity as AppCompatActivity
         return inflater.inflate(layout, container, false)
     }
@@ -97,17 +109,26 @@ abstract class BaseFragment : Fragment() {
     }
 
     //region region:Toolbar
-    protected fun setUpToolbar(toolbar: Toolbar) {
+    protected fun setUpToolbar(toolbar: Toolbar, title: String? = null) {
         parentActivity.setSupportActionBar(toolbar)
-        parentActivity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        parentActivity.supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            if (!title.isNullOrBlank()) setTitle(title)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            android.R.id.home -> parentActivity.finish()
+            android.R.id.home -> {
+                if (parentActivity.supportFragmentManager.backStackEntryCount > 1)
+                    popBack()
+                else parentActivity.finish()
+            }
         }
         return super.onOptionsItemSelected(item)
     }
+
     //endregion
+    protected fun popBack() = parentActivity.supportFragmentManager.popBackStack()
 
 }
