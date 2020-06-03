@@ -1,9 +1,9 @@
-package com.swapi_app_android.starwars.archieteture
+package com.mbarros64.swapi_app_android.archieteture
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.swapi_app_android.starwars.extensions.hide
+import com.mbarros64.swapi_app_android.extensions.hide
 import io.reactivex.disposables.CompositeDisposable
 
 abstract class BaseVM : ViewModel() {

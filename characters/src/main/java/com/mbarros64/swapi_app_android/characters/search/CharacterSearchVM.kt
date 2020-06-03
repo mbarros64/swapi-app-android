@@ -1,23 +1,23 @@
 package com.mbarros64.swapi_app_android.characters.search
 
-import com.swapi_app_android.starwars.archieteture.BaseVM
-import com.swapi_app_android.starwars.extensions.hide
-import com.swapi_app_android.starwars.extensions.show
+import com.mbarros64.swapi_app_android.archieteture.BaseVM
+import com.mbarros64.swapi_app_android.extensions.hide
+import com.mbarros64.swapi_app_android.extensions.show
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.mbarros64.swapi_app_android.characters.search.models.CharacterResponseModel
 import com.mbarros64.swapi_app_android.characters.search.models.CharacterSearchModel
-import com.swapi_app_android.starwars.archieteture.RemoteResponse
+import com.mbarros64.swapi_app_android.archieteture.RemoteResponse
 import io.reactivex.Single
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 
 class CharacterSearchVM(private val repo: CharacterSearchContract.Repo?) : BaseVM() {
 
-    val _characters = MutableLiveData<List<CharacterSearchModel>>()
+    private val _characters = MutableLiveData<List<CharacterSearchModel>>()
     val characters: LiveData<List<CharacterSearchModel>> by lazy { _characters }
 
-    var nextPageUrl: String? = ""
+    private var nextPageUrl: String? = ""
     private var processing: Boolean = false
 
 
@@ -39,7 +39,9 @@ class CharacterSearchVM(private val repo: CharacterSearchContract.Repo?) : BaseV
         if (processing) return
 
         processing = true
-        handleCharactersObs(repo.characters(url), resetItems)
+        if (repo != null) {
+            handleCharactersObs(repo.characters(url), resetItems)
+        }
     }
 
     private fun handleCharactersObs(charactersObs: Single<RemoteResponse<List<CharacterResponseModel>>>, resetItems: Boolean) {
@@ -97,7 +99,9 @@ class CharacterSearchVM(private val repo: CharacterSearchContract.Repo?) : BaseV
         if (query.isNullOrEmpty()) return
 
         _loading.show()
-        handleCharactersObs(repo.searchCharacter(query), true)
+        if (repo != null) {
+            handleCharactersObs(repo.searchCharacter(query), true)
+        }
     }
 
     fun refreshCharacters() {

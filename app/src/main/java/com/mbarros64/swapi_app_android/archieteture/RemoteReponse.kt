@@ -1,4 +1,4 @@
-package com.swapi_app_android.starwars.archieteture
+package com.mbarros64.swapi_app_android.archieteture
 
 import com.google.gson.annotations.SerializedName
 

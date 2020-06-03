@@ -1,7 +1,7 @@
 package com.mbarros64.swapi_app_android.characters
 
 import com.mbarros64.swapi_app_android.characters.search.models.CharacterResponseModel
-import com.swapi_app_android.starwars.archieteture.RemoteResponse
+import com.mbarros64.swapi_app_android.archieteture.RemoteResponse
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query

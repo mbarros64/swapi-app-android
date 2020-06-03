@@ -1,4 +1,4 @@
-package com.swapi_app_android.starwars.extensions
+package com.mbarros64.swapi_app_android.extensions
 
 abstract class EndlessScrollListener : androidx.recyclerview.widget.RecyclerView.OnScrollListener {
     private val visibleThreshold: Int

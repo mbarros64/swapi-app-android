@@ -1,4 +1,4 @@
-package com.swapi_app_android.starwars.dependencies
+package com.mbarros64.swapi_app_android.dependencies
 
 import android.content.Context
 import com.google.gson.ExclusionStrategy

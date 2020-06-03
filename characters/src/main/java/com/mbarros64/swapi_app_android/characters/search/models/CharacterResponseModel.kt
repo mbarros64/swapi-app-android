@@ -1,6 +1,6 @@
 package com.mbarros64.swapi_app_android.characters.search.models
 import com.google.gson.annotations.SerializedName
-import com.swapi_app_android.starwars.dependencies.Exclude
+import com.mbarros64.swapi_app_android.dependencies.Exclude
 
 
 data class CharacterResponseModel(

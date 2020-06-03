@@ -27,7 +27,7 @@ class CharacterSearchAdapter(private val interaction: Interaction? = null) :
     }
 
     inner class CharacterSearchVH(itemView: View, private val interaction: Interaction?)
-        : RecyclerView.ViewHolder(itemView), DialogInterface.OnClickListener {
+        : RecyclerView.ViewHolder(itemView), OnClickListener {
 
         init {
             itemView.setOnClickListener(this)
@@ -50,11 +50,9 @@ class CharacterSearchAdapter(private val interaction: Interaction? = null) :
 
     private class CharacterSearchModelDC : DiffUtil.ItemCallback<CharacterSearchModel>() {
         override fun areItemsTheSame(oldItem: CharacterSearchModel,
-                                     newItem: CharacterSearchModel
-        ) = oldItem.url == newItem.url
+                                     newItem: CharacterSearchModel) = oldItem.url == newItem.url
 
         override fun areContentsTheSame(oldItem: CharacterSearchModel,
-                                        newItem: CharacterSearchModel
-        ) = oldItem == newItem
+                                        newItem: CharacterSearchModel) = oldItem == newItem
     }
 }

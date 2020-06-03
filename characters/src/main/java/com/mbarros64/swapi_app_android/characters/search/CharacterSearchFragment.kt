@@ -8,10 +8,10 @@ import android.widget.SearchView
 import androidx.recyclerview.widget.RecyclerView
 import com.mbarros64.swapi_app_android.characters.R
 import com.mbarros64.swapi_app_android.characters.search.models.CharacterSearchModel
-import com.swapi_app_android.starwars.archieteture.BaseFragment
-import com.swapi_app_android.starwars.extensions.EndlessScrollListener
-import com.swapi_app_android.starwars.extensions.visible
-import com.swapi_app_android.starwars.extensions.gone
+import com.mbarros64.swapi_app_android.archieteture.BaseFragment
+import com.mbarros64.swapi_app_android.extensions.EndlessScrollListener
+import com.mbarros64.swapi_app_android.extensions.visible
+import com.mbarros64.swapi_app_android.extensions.gone
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.actionbar_toolbar.*
 import kotlinx.android.synthetic.main.fragment_search_character.*
@@ -19,8 +19,9 @@ import org.koin.android.ext.android.inject
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.reactivex.rxkotlin.addTo
-import kotlinx.android.synthetic.main.actionbar_toolbar.*
 import java.util.concurrent.TimeUnit
+import android.content.Context
+
 
 
 class CharacterSearchFragment : BaseFragment(), CharacterSearchAdapter.Interaction {
@@ -38,9 +39,20 @@ class CharacterSearchFragment : BaseFragment(), CharacterSearchAdapter.Interacti
     //Pagination
     private lateinit var endlessScrollListener: EndlessScrollListener
 
+    //Navigator
+    private var navigator: CharacterNavigator? = null
+
     companion object {
         const val TAG = "CharacterSearchFragment"
         fun newInstance() = CharacterSearchFragment()
+    }
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        if (context is CharacterNavigator)
+            navigator = context
+
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -155,6 +167,10 @@ class CharacterSearchFragment : BaseFragment(), CharacterSearchAdapter.Interacti
         srlCharacters.isRefreshing = true
     }
 
+    interface CharacterNavigator {
+        fun showCharacterDetails(character: CharacterSearchModel)
+    }
+
     override fun onResume() {
         super.onResume()
         rvCharacters.addOnScrollListener(endlessScrollListener)
@@ -162,7 +178,7 @@ class CharacterSearchFragment : BaseFragment(), CharacterSearchAdapter.Interacti
 
     //Adapter interactions
     override fun characterClicked(character: CharacterSearchModel) {
-        showToast("Clicked $character")
+        navigator?.showCharacterDetails(character)
     }
 
 }

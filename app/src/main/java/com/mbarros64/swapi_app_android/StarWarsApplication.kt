@@ -1,7 +1,7 @@
-package com.swapi_app_android.starwars
+package com.mbarros64.swapi_app_android
 
 import android.app.Application
-import com.swapi_app_android.starwars.dependencies.BaseDependencies
+import com.mbarros64.swapi_app_android.dependencies.BaseDependencies
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
