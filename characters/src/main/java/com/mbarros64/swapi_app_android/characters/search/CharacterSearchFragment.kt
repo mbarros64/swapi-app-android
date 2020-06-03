@@ -178,6 +178,7 @@ class CharacterSearchFragment : BaseFragment(), CharacterSearchAdapter.Interacti
 
     //Adapter interactions
     override fun characterClicked(character: CharacterSearchModel) {
+        searchView?.clearFocus()
         navigator?.showCharacterDetails(character)
     }
 

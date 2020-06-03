@@ -1,10 +1,10 @@
 package com.mbarros64.swapi_app_android.characters
 
 import com.mbarros64.swapi_app_android.archieteture.RemoteResponse
-import com.mbarros64.swapi_app_android.characters.details.model.CharacterDetailsModel
-import com.mbarros64.swapi_app_android.characters.details.model.CharacterFilmModel
-import com.mbarros64.swapi_app_android.characters.details.model.CharacterHomeworldModel
-import com.mbarros64.swapi_app_android.characters.details.model.CharacterSpeciesModel
+import com.mbarros64.swapi_app_android.characters.details.models.CharacterDetailsModel
+import com.mbarros64.swapi_app_android.characters.details.models.FilmResponseModel
+import com.mbarros64.swapi_app_android.characters.details.models.HomeworldResponseModel
+import com.mbarros64.swapi_app_android.characters.details.models.SpeciesResponseModel
 import com.mbarros64.swapi_app_android.characters.search.models.CharacterSearchModel
 import io.reactivex.Single
 import retrofit2.http.GET
@@ -23,12 +23,12 @@ interface CharacterService {
     fun getCharacterDetails(@Url url: String): Single<CharacterDetailsModel>
 
     @GET
-    fun getCharacterSpecies(@Url url: String): Single<CharacterSpeciesModel>
+    fun getCharacterSpecies(@Url url: String): Single<SpeciesResponseModel>
 
     @GET
-    fun getCharacterHomeworld(@Url url: String): Single<CharacterHomeworldModel>
+    fun getCharacterHomeworld(@Url url: String): Single<HomeworldResponseModel>
 
     @GET
-    fun getCharacterFilms(@Url url: String): Single<CharacterFilmModel>
+    fun getCharacterFilms(@Url url: String): Single<FilmResponseModel>
 
 }

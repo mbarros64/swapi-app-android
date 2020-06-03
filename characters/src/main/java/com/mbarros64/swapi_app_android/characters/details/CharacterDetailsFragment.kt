@@ -6,9 +6,9 @@ import androidx.lifecycle.Observer
 import com.mbarros64.swapi_app_android.characters.R
 import com.mbarros64.swapi_app_android.characters.search.models.CharacterSearchModel
 import com.mbarros64.swapi_app_android.archieteture.BaseFragment
-import com.mbarros64.swapi_app_android.characters.details.model.CharacterDetailsModel
-import com.mbarros64.swapi_app_android.characters.details.ui.FilmDetailsView
-import com.mbarros64.swapi_app_android.characters.details.ui.SpecieDetailsView
+import com.mbarros64.swapi_app_android.characters.details.models.CharacterDetailsModel
+import com.mbarros64.swapi_app_android.characters.details.Layouts.FilmDetailsView
+import com.mbarros64.swapi_app_android.characters.details.Layouts.SpecieDetailsView
 import com.mbarros64.swapi_app_android.extensions.isValid
 import com.mbarros64.swapi_app_android.extensions.visible
 import kotlinx.android.synthetic.main.actionbar_toolbar.*
@@ -76,15 +76,17 @@ class CharacterDetailsFragment : BaseFragment() {
             tvHeight.visible()
             tvHeight.text = String.format(getString(R.string.cms), details.heightCentimeters)
         }
-        if (details.heightFt.isValid() && details.heightInches.isValid()) {
+
+        if (details.heightFtInches != null) {
             tvHeightFeet.visible()
-            tvHeightFeet.text =
-                String.format(getString(R.string.feet_inches), details.heightFt, details.heightInches)
+            tvHeightFeet.text = String.format(getString(R.string.feet_inches),
+                details.heightFtInches.first, details.heightFtInches.second)
         }
 
         details.specieDetails?.run {
             tvSpeciesLabel.visible()
             llSpeciesDetails.visible()
+            llSpeciesDetails.removeAllViews()
             forEach {
                 val specieLanguageView = SpecieDetailsView(parentActivity)
                 specieLanguageView.specieDetails(it)
@@ -103,7 +105,6 @@ class CharacterDetailsFragment : BaseFragment() {
         }
     }
 
-
     override fun hideLoading() {
         srlDetails.isRefreshing = false
     }
@@ -111,6 +112,4 @@ class CharacterDetailsFragment : BaseFragment() {
     override fun showLoading() {
         srlDetails.isRefreshing = true
     }
-
-
 }
