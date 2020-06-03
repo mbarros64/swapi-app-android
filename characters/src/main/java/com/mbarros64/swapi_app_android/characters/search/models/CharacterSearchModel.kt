@@ -1,12 +1,13 @@
 package com.mbarros64.swapi_app_android.characters.search.models
 
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 
     data class CharacterSearchModel(
-        val url: String?,
-        val name: String?,
-        val birthYear: String?
+        @SerializedName("url") val url: String?,
+        @SerializedName("name") val name: String?,
+        @SerializedName("birth_year") val birthYear: String?
     ) : Parcelable

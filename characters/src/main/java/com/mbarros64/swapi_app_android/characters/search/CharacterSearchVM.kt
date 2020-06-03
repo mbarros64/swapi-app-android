@@ -5,7 +5,6 @@ import com.mbarros64.swapi_app_android.extensions.hide
 import com.mbarros64.swapi_app_android.extensions.show
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.mbarros64.swapi_app_android.characters.search.models.CharacterResponseModel
 import com.mbarros64.swapi_app_android.characters.search.models.CharacterSearchModel
 import com.mbarros64.swapi_app_android.archieteture.RemoteResponse
 import io.reactivex.Single
@@ -44,7 +43,7 @@ class CharacterSearchVM(private val repo: CharacterSearchContract.Repo?) : BaseV
         }
     }
 
-    private fun handleCharactersObs(charactersObs: Single<RemoteResponse<List<CharacterResponseModel>>>, resetItems: Boolean) {
+    private fun handleCharactersObs(charactersObs: Single<RemoteResponse<List<CharacterSearchModel>>>, resetItems: Boolean) {
         charactersObs
             .subscribeOn(Schedulers.io())
             .observeOn(Schedulers.computation())
@@ -52,15 +51,7 @@ class CharacterSearchVM(private val repo: CharacterSearchContract.Repo?) : BaseV
                 nextPageUrl = response.next
                 return@map response.results
             }
-            .map { characters ->
-                characters.map {
-                    CharacterSearchModel(
-                        it.url,
-                        it.name,
-                        it.birthYear
-                    )
-                }
-            }
+
             .map { searchModels ->
                 appendOrSetResults(resetItems, _characters.value, searchModels)
             }

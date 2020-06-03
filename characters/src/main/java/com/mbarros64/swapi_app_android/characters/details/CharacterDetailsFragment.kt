@@ -7,6 +7,7 @@ import com.mbarros64.swapi_app_android.characters.search.models.CharacterSearchM
 import com.mbarros64.swapi_app_android.archieteture.BaseFragment
 import kotlinx.android.synthetic.main.actionbar_toolbar.*
 import kotlinx.android.synthetic.main.fragment_character_details.*
+import kotlinx.android.synthetic.main.item_character_search.*
 import org.koin.android.ext.android.inject
 
 class CharacterDetailsFragment : BaseFragment() {
@@ -46,6 +47,14 @@ class CharacterDetailsFragment : BaseFragment() {
         setUpToolbar(toolbar, selectedCharacter?.name)
 
         srlDetails.isEnabled = false
+
+
+        tvName.text = selectedCharacter?.name
+        tvYOB.text = selectedCharacter?.birthYear
+
+        selectedCharacter?.url?.run {
+            viewModel.getCharacterDetails(this)
+        }
 
     }
 
