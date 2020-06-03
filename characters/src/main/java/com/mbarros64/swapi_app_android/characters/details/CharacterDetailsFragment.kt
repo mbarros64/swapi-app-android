@@ -2,12 +2,15 @@ package com.mbarros64.swapi_app_android.characters.details
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
 import com.mbarros64.swapi_app_android.characters.R
 import com.mbarros64.swapi_app_android.characters.search.models.CharacterSearchModel
 import com.mbarros64.swapi_app_android.archieteture.BaseFragment
+import com.mbarros64.swapi_app_android.characters.details.model.CharacterDetailsModel
+import com.mbarros64.swapi_app_android.characters.details.ui.SpecieDetailsView
+import com.mbarros64.swapi_app_android.extensions.visible
 import kotlinx.android.synthetic.main.actionbar_toolbar.*
 import kotlinx.android.synthetic.main.fragment_character_details.*
-import kotlinx.android.synthetic.main.item_character_search.*
 import org.koin.android.ext.android.inject
 
 class CharacterDetailsFragment : BaseFragment() {
@@ -48,12 +51,42 @@ class CharacterDetailsFragment : BaseFragment() {
 
         srlDetails.isEnabled = false
 
-
         tvName.text = selectedCharacter?.name
         tvYOB.text = selectedCharacter?.birthYear
 
         selectedCharacter?.url?.run {
             viewModel.getCharacterDetails(this)
+                .observe(this@CharacterDetailsFragment, Observer { details ->
+                    handleCharacterDetails(details)
+                })
+        }
+
+    }
+
+    private fun handleCharacterDetails(details: CharacterDetailsModel) {
+
+        tvName.text = details.name
+
+        tvYOB.text = details.birthYear
+
+        if (details.heightCentimeters.isValid()) {
+            tvHeightLabel.visible()
+            tvHeight.visible()
+            tvHeight.text = details.heightCentimeters
+        }
+        if (details.heightFt.isValid()) {
+            tvHeightFeet.visible()
+            tvHeightFeet.text = details.heightFt
+        }
+
+        details.specieDetails?.run {
+            tvSpeciesLabel.visible()
+            llSpeciesDetails.visible()
+            forEach {
+                val specieLanguageView = SpecieDetailsView(parentActivity)
+                specieLanguageView.setSpecieAndLanguage(it)
+                llSpeciesDetails.addView(specieLanguageView)
+            }
         }
 
     }
@@ -66,5 +99,8 @@ class CharacterDetailsFragment : BaseFragment() {
         srlDetails.isRefreshing = true
     }
 
+    fun String?.isValid(): Boolean {
+        return !this.isNullOrEmpty()
+    }
 
 }
